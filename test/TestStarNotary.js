@@ -34,8 +34,9 @@ it('lets user1 get the funds after the sale', async() => {
     let balance = web3.utils.toWei(".05", "ether");
     await instance.createStar('awesome star', starId, {from: user1});
     await instance.putStarUpForSale(starId, starPrice, {from: user1});
+    await instance.approve(user2, starId, {from: user1});
     let balanceOfUser1BeforeTransaction = await web3.eth.getBalance(user1);
-    await instance.buyStar(starId, {from: user2, value: balance});
+    await instance.buyStar(starId, {from: user2, value: starPrice});
     let balanceOfUser1AfterTransaction = await web3.eth.getBalance(user1);
     let value1 = Number(balanceOfUser1BeforeTransaction) + Number(starPrice);
     let value2 = Number(balanceOfUser1AfterTransaction);
@@ -51,6 +52,7 @@ it('lets user2 buy a star, if it is put up for sale', async() => {
     let balance = web3.utils.toWei(".05", "ether");
     await instance.createStar('awesome star', starId, {from: user1});
     await instance.putStarUpForSale(starId, starPrice, {from: user1});
+    await instance.approve(user2, starId, {from: user1});
     let balanceOfUser1BeforeTransaction = await web3.eth.getBalance(user2);
     await instance.buyStar(starId, {from: user2, value: balance});
     assert.equal(await instance.ownerOf.call(starId), user2);
@@ -64,10 +66,12 @@ it('lets user2 buy a star and decreases its balance in ether', async() => {
     let starPrice = web3.utils.toWei(".01", "ether");
     let balance = web3.utils.toWei(".05", "ether");
     await instance.createStar('awesome star', starId, {from: user1});
-    await instance.putStarUpForSale(starId, starPrice, {from: user1});
+    await instance.putStarUpForSale(starId, starPrice, {from: user1});    
+    await instance.approve(user2, starId, {from: user1});
     let balanceOfUser1BeforeTransaction = await web3.eth.getBalance(user2);
     const balanceOfUser2BeforeTransaction = await web3.eth.getBalance(user2);
-    await instance.buyStar(starId, {from: user2, value: balance, gasPrice:0});
+    await instance.buyStar(starId, {from: user2,value: balance,maxFeePerGas: web3.utils.toWei('52', 'gwei'),
+        maxPriorityFeePerGas: web3.utils.toWei('2', 'gwei'),gasPrice: web3.utils.toWei('2', 'gwei')});
     const balanceAfterUser2BuysStar = await web3.eth.getBalance(user2);
     let value = Number(balanceOfUser2BeforeTransaction) - Number(balanceAfterUser2BuysStar);
     assert.equal(value, starPrice);
