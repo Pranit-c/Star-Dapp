@@ -4,7 +4,7 @@ The purpose of this project is to demonstrate an understanding and functioning o
 *By Pranit Chand, Marlboro Insitute of Liberal Arts and Interdisciplinary Studies, Emerson College, 2023*
 ## Source
 https://github.com/udacity/nd1309-p2-Decentralized-Star-Notary-Service-Starter-Code
-## Version Used
+## Dependencies Version Used
 Truffle v5.7.7 (core: 5.7.7)
 <br>
 Ganache v7.7.5
