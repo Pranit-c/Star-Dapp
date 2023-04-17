@@ -1,5 +1,7 @@
 ## Decentralized Star Application 
 The purpose of this project is to demonstrate an understanding and functioning of how Decentralized Applications works on the Ethereum Blockchain. This is my attempt to ensure that creator's are competent of understanding the functioning of a decentralized blockchain application.
+<br>
+*By Pranit Chand, Marlboro Insitute of Liberal Arts and Interdisciplinary Studies, Emerson College, 2023*
 ## Source
 https://github.com/udacity/nd1309-p2-Decentralized-Star-Notary-Service-Starter-Code
 ## Version Used
